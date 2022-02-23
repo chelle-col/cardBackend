@@ -35,7 +35,7 @@ public class DeckControllerTest {
     public void shouldCreateNewDeck() throws Exception{
         UUID id = UUID.randomUUID();
         when(decks.add(any())).thenReturn(id);
-        Deck d = new Deck();
+        Deck d = new Deck(1);
         this.mock.perform(
             post("/deck/newDeck")
         ).andDo(print())
@@ -48,7 +48,7 @@ public class DeckControllerTest {
     public void shouldCreateShuffledDeck() throws Exception{
         UUID id = UUID.randomUUID();
         when(decks.add(any())).thenReturn(id);
-        Deck d = new Deck();
+        Deck d = new Deck(1);
         this.mock.perform(
             post("/deck/newDeck")
             .param("shuffle", "true")
@@ -61,7 +61,7 @@ public class DeckControllerTest {
     public void shouldGetDeck() throws Exception{
         UUID id = UUID.randomUUID();
         when(decks.add(any())).thenReturn(id);
-        Deck d = new Deck();
+        Deck d = new Deck(1);
         when(decks.findDeckByID(any())).thenReturn(d);
         this.mock.perform(
             get("/deck/")
@@ -85,7 +85,7 @@ public class DeckControllerTest {
     public void shouldDrawCard() throws Exception{
         UUID id = UUID.randomUUID();
         when(decks.add(any())).thenReturn(id);
-        Deck d = new Deck();
+        Deck d = new Deck(1);
         when(decks.findDeckByID(any())).thenReturn(d);
         this.mock.perform(
             get("/deck/draw")
@@ -100,7 +100,7 @@ public class DeckControllerTest {
     public void shouldDrawCardFromBottom() throws Exception{
         UUID id = UUID.randomUUID();
         when(decks.add(any())).thenReturn(id);
-        Deck d = new Deck();
+        Deck d = new Deck(1);
         when(decks.findDeckByID(any())).thenReturn(d);
         this.mock.perform(
             get("/deck/draw")
