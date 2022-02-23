@@ -10,10 +10,10 @@ public class Deck {
     private LocalDateTime createdAt;
 
     private String[] suits = {"Spade", "Club", "Heart", "Diamond"};
-    private String[] cardNumbers = {"Ace", "One", "Two", "Three", "Four",
+    private String[] cardNumbers = {"Ace", "Two", "Three", "Four",
          "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"};
 
-    private List<Card> cardsDelt = new ArrayList<Card>();
+    private List<Card> discard = new ArrayList<Card>();
 
     {
         int idx = 0;
@@ -36,13 +36,13 @@ public class Deck {
 
     public Card drawTopCard(){
         Card c = cards.remove(0);
-        cardsDelt.add(c);
+        discard.add(c);
         return c;
     }
 
     public Card drawBottomCard(){
         Card c = cards.remove(cards.size()-1);
-        cardsDelt.add(c);
+        discard.add(c);
         return c;
     }
 
@@ -54,7 +54,7 @@ public class Deck {
         return cards;
     }
 
-    public List<Card> getDeltCards(){
-        return cardsDelt;
+    public List<Card> getDiscard(){
+        return discard;
     }
 }
