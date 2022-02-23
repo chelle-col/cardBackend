@@ -4,10 +4,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 public class Deck {
     private List<Card> cards = new ArrayList<Card>();
     private LocalDateTime createdAt;
+    private LocalDateTime expiresOn;
+    private UUID id;
 
     private String[] suits = {"Spade", "Club", "Heart", "Diamond"};
     private String[] cardNumbers = {"Ace", "Two", "Three", "Four",
@@ -26,8 +29,10 @@ public class Deck {
     }
 
 
-    public Deck() {
+    public Deck(long days) {
         createdAt = LocalDateTime.now();
+        expiresOn = LocalDateTime.now().plusDays(days);
+        this.id = UUID.randomUUID();
     }
 
     public void shuffle(){
@@ -65,6 +70,14 @@ public class Deck {
 
     public String[] getCardNumbers() {
         return this.cardNumbers;
+    }
+
+    public LocalDateTime getExpiresOn(){
+        return expiresOn;
+    }
+
+    public UUID getId(){
+        return this.id;
     }
 
     @Override

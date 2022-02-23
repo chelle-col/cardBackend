@@ -29,9 +29,8 @@ public class DeckController {
 
     @PostMapping("/newDeck")
     public ResponseEntity<?> createNewDeck(@RequestParam(required = false) Boolean shuffle){
-        Deck newDeck = new Deck();
+        Deck newDeck = new Deck(expiresIn);
         UUID id = decks.add(newDeck);
-        System.out.println(newDeck);
         if(shuffle != null && shuffle){
             newDeck.shuffle();
         }
