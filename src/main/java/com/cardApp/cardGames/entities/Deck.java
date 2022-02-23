@@ -57,4 +57,23 @@ public class Deck {
     public List<Card> getDiscard(){
         return discard;
     }
+
+
+    public List<Card> getCards() {
+        return this.cards;
+    }
+
+    public String[] getCardNumbers() {
+        return this.cardNumbers;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " cards='" + getCards() + "'" +
+            ", createdAt='" + getCreatedAt() + "'" +
+            ", discard='" + getDiscard() + "'" +
+            "}";
+    }
+
 }

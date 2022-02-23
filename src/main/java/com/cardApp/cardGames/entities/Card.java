@@ -17,4 +17,14 @@ public class Card {
     public String getCard() {
         return this.card;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " number=" + getNumber() + "" +
+            ", card=" + getCard() + "" +
+            "}";
+    }
+
+
 }

@@ -1,7 +1,5 @@
 package com.cardApp.cardGames.controllers;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 import com.cardApp.cardGames.entities.Card;
@@ -9,7 +7,9 @@ import com.cardApp.cardGames.entities.Deck;
 import com.cardApp.cardGames.exceptions.NotFoundException;
 import com.cardApp.cardGames.pojos.DeckDrawResponse;
 import com.cardApp.cardGames.pojos.DeckResponseBody;
+import com.cardApp.cardGames.repository.Decks;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,17 +22,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/deck")
 public class DeckController {
-    Map<UUID, Deck> decks = new HashMap<UUID, Deck>();
-    {
-        decks.put(UUID.fromString("177eafca-93ff-11ec-b909-0242ac120002"), new Deck());
-    }
+    @Autowired
+    private Decks decks;
+
     private int expiresIn = 25;
 
     @PostMapping("/newDeck")
     public ResponseEntity<?> createNewDeck(@RequestParam(required = false) Boolean shuffle){
         Deck newDeck = new Deck();
-        UUID id = UUID.randomUUID();
-        decks.put(id, newDeck);
+        UUID id = decks.add(newDeck);
+        System.out.println(newDeck);
         if(shuffle != null && shuffle){
             newDeck.shuffle();
         }
@@ -47,7 +46,7 @@ public class DeckController {
     @GetMapping("/")
     public ResponseEntity<?> getDeck(@RequestParam String id){
         UUID uuid = UUID.fromString(id);
-        Deck deck = decks.get(uuid);
+        Deck deck = decks.findDeckByID(uuid);
         if(deck == null) throw new NotFoundException("Deck with id "+ id +" not Found. To make new deck send get request to /deck/newDeck");
         return ResponseEntity.status(HttpStatus.CREATED)
             .body(new DeckResponseBody(
@@ -63,9 +62,10 @@ public class DeckController {
             @RequestParam(required = false) Boolean fromBottom
         ){
         UUID uuid = UUID.fromString(id);
-        Deck deck = decks.get(uuid);
+        Deck deck = decks.findDeckByID(uuid);
+        if(deck == null) throw new NotFoundException("Deck with id "+ id +" not Found. To make new deck send get request to /deck/newDeck");
         Card card;
-        if(fromBottom){
+        if(fromBottom != null && fromBottom){
             card = deck.drawBottomCard();
         }else{
             card = deck.drawTopCard();
@@ -82,8 +82,8 @@ public class DeckController {
     @DeleteMapping
     public ResponseEntity<?> deleteDeck(@RequestParam String id){
         UUID uuid = UUID.fromString(id);
-        Deck deck = decks.remove(uuid);
-        if(deck == null) throw new NotFoundException("No Deck with id of " + id + " found.");
+        boolean wasRemoved = decks.remove(uuid);
+        if(!wasRemoved) throw new NotFoundException("No Deck with id of " + id + " found.");
         return ResponseEntity.status(HttpStatus.OK).body(id + " successfully deleted");
     }
 }

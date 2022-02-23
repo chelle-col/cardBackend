@@ -1,6 +1,6 @@
 package com.cardApp.cardGames.exceptions;
 
-public class NotFoundException extends RuntimeException {
+public class NotFoundException extends RequestException {
 
     public NotFoundException(String msg) {
         super(msg);
