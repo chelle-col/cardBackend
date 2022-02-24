@@ -1,7 +1,7 @@
 package com.cardApp.cardGames.controllers;
 
 import com.cardApp.cardGames.exceptions.RequestException;
-import com.cardApp.cardGames.pojos.ExceptionResopnse;
+import com.cardApp.cardGames.responseWrappers.ExceptionResopnse;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

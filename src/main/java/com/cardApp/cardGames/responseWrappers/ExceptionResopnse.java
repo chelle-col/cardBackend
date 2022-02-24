@@ -1,4 +1,4 @@
-package com.cardApp.cardGames.pojos;
+package com.cardApp.cardGames.responseWrappers;
 
 public class ExceptionResopnse {
     private String msg;

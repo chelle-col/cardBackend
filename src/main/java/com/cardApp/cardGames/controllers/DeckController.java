@@ -5,9 +5,9 @@ import java.util.UUID;
 import com.cardApp.cardGames.entities.Card;
 import com.cardApp.cardGames.entities.Deck;
 import com.cardApp.cardGames.exceptions.NotFoundException;
-import com.cardApp.cardGames.pojos.DeckDrawResponse;
-import com.cardApp.cardGames.pojos.DeckResponseBody;
 import com.cardApp.cardGames.repository.Decks;
+import com.cardApp.cardGames.responseWrappers.DeckDrawResponse;
+import com.cardApp.cardGames.responseWrappers.DeckResponseBody;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

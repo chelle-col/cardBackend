@@ -15,7 +15,7 @@ public class Decks {
     Map<UUID, Deck> decks = new HashMap<UUID, Deck>();
     {
         UUID id = UUID.fromString("177eafca-93ff-11ec-b909-0242ac120002");
-        decks.put(id, new Deck((long) 0.001, id));
+        decks.put(id, new Deck((long) 1, id));
     }
 
     public UUID add(Deck d){

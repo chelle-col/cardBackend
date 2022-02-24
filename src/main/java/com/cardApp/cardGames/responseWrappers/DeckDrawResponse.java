@@ -1,4 +1,4 @@
-package com.cardApp.cardGames.pojos;
+package com.cardApp.cardGames.responseWrappers;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
