@@ -15,7 +15,7 @@ public class Decks {
     Map<UUID, Deck> decks = new HashMap<UUID, Deck>();
     {
         UUID id = UUID.fromString("177eafca-93ff-11ec-b909-0242ac120002");
-        decks.put(id, new Deck(1));
+        decks.put(id, new Deck((long) 0.001, id));
     }
 
     public UUID add(Deck d){
@@ -35,15 +35,16 @@ public class Decks {
         return true;
     }
 
-    @Scheduled( fixedRate = 10000 )
-    //86400000
+    @Scheduled( fixedRate = 86400000 )
     public void printing(){
-        Deck[] deckArray = (Deck[]) decks.values().toArray();
-        for(Deck d : deckArray){
-            if(d.getExpiresOn().isBefore(LocalDateTime.now())){
-                decks.remove(d.getId());
+        Object[] deckArray = decks.values().toArray();
+        int numRemoved = 0;
+        for(Object d : deckArray){
+            if(((Deck)d).getExpiresOn().isBefore(LocalDateTime.now())){
+                numRemoved++;
+                decks.remove(((Deck)d).getId());
             }
         }
-        System.out.println("Fixed delay");
+        System.out.println(numRemoved);
     }
 }
