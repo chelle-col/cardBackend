@@ -3,11 +3,13 @@ package com.cardApp.cardGames.entities;
 public class Card {
     private int number;
     private String card;
+    private String imgUrl;
 
 
-    public Card(int number, String card) {
+    public Card(int number, String card, String imgUrl) {
         this.number = number;
         this.card = card;
+        this.imgUrl = imgUrl;
     }
 
     public int getNumber() {
@@ -16,6 +18,10 @@ public class Card {
 
     public String getCard() {
         return this.card;
+    }
+
+    public String getImgUrl(){
+        return this.imgUrl;
     }
 
     @Override

@@ -25,7 +25,7 @@ public class Deck {
         int idx = 0;
         for(String suit : suits){
             for(String cardNum : cardNumbers){
-                cards.add(new Card( idx, cardNum + " of " + suit + "s" ));
+                cards.add(new Card( idx, cardNum + " of " + suit + "s", cardNum + "_of_" + suit + "s" ));
                 idx++;
             }
         }
